@@ -7,7 +7,8 @@ class NumberAnimation extends StatelessWidget {
   final Interval interval;
   final TextStyle? textStyle;
 
-  const NumberAnimation({super.key,
+  const NumberAnimation({
+    super.key,
     required this.start,
     required this.end,
     required this.controller,
@@ -23,7 +24,7 @@ class NumberAnimation extends StatelessWidget {
     ).animate(
       CurvedAnimation(
         parent: controller,
-        curve: interval, // Control when the number animation happens
+        curve: interval,
       ),
     );
 

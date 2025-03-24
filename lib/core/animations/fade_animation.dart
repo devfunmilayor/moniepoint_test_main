@@ -6,18 +6,19 @@ class FadeAnimation extends StatelessWidget {
   final Interval interval;
   final bool fadeIn;
 
-  const FadeAnimation({super.key, required this.child, required this.controller, required this.interval,  this.fadeIn = true});
+  const FadeAnimation(
+      {super.key,
+      required this.child,
+      required this.controller,
+      required this.interval,
+      this.fadeIn = true});
 
   @override
   Widget build(BuildContext context) {
-    final Animation<double> fadeAnimation = Tween<double>(
-      begin: fadeIn ? 0.0 : 1.0, // Adjust based on fadeIn or fadeOut
-      end: fadeIn ? 1.0 : 0.0,
-    ).animate(
-      CurvedAnimation(
-        parent: controller,
-        curve: interval, // Pass the Interval for fade timing
-      ),
+    final Animation<double> fadeAnimation =
+        Tween<double>(begin: fadeIn ? 0.0 : 1.0, end: fadeIn ? 1.0 : 0.0)
+            .animate(
+      CurvedAnimation(parent: controller, curve: interval),
     );
 
     return FadeTransition(

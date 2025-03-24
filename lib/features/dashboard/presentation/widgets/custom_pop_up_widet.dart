@@ -1,18 +1,21 @@
 import 'package:flutter/material.dart';
+import 'package:hugeicons/hugeicons.dart';
 import 'package:moniepoint_test/config/theme/app_palette.dart';
 import 'package:moniepoint_test/features/dashboard/presentation/widgets/popup_item_widget.dart';
 
 import 'option_btn_widget.dart';
 
-
 class BottomOptionWidgetsSection extends StatefulWidget {
-  const BottomOptionWidgetsSection({super.key, required this.onOptionSelectedChange, required this.optionSelectedIndex});
+  const BottomOptionWidgetsSection(
+      {super.key,
+      required this.onOptionSelectedChange,
+      required this.optionSelectedIndex});
   final ValueChanged<int> onOptionSelectedChange;
   final int optionSelectedIndex;
 
   @override
-  _BottomOptionWidgetsSectionState createState() => _BottomOptionWidgetsSectionState();
-
+  _BottomOptionWidgetsSectionState createState() =>
+      _BottomOptionWidgetsSectionState();
 }
 
 class _BottomOptionWidgetsSectionState extends State<BottomOptionWidgetsSection>
@@ -54,7 +57,7 @@ class _BottomOptionWidgetsSectionState extends State<BottomOptionWidgetsSection>
   Widget build(BuildContext context) {
     Size size = MediaQuery.of(context).size;
     return SizedBox(
-      width: size.width , // or a specific width
+      width: size.width, // or a specific width
       height: size.height * .4,
       child: Stack(
         children: [
@@ -74,12 +77,12 @@ class _BottomOptionWidgetsSectionState extends State<BottomOptionWidgetsSection>
             child: ScaleTransition(
               scale: _scaleAnimation,
               alignment: Alignment.bottomLeft,
-              child: _buildPopupContent(onSelected: (val) {
-                _togglePopup();
-                widget.onOptionSelectedChange(val);
-              },
-                selectedItem: widget.optionSelectedIndex
-              ),
+              child: _buildPopupContent(
+                  onSelected: (val) {
+                    _togglePopup();
+                    widget.onOptionSelectedChange(val);
+                  },
+                  selectedItem: widget.optionSelectedIndex),
             ),
           ),
           Positioned(
@@ -130,12 +133,16 @@ class _BottomOptionWidgetsSectionState extends State<BottomOptionWidgetsSection>
     );
   }
 
-  Widget _buildPopupContent({required ValueChanged<int> onSelected,  int selectedItem = 0}) {
+  Widget _buildPopupContent(
+      {required ValueChanged<int> onSelected, int selectedItem = 0}) {
     final List<PopUpModel> btnList = [
-      PopUpModel(icon: Icons.check_box_outlined, title: 'Cozy areas'),
-      PopUpModel(icon: Icons.attach_money, title: 'Price'),
-      PopUpModel(icon: Icons.shopping_basket, title: 'Infrastructure'),
-      PopUpModel(icon: Icons.layers, title: 'Layer'),
+      PopUpModel(
+          icon: HugeIcons.strokeRoundedSecurityCheck, title: 'Cozy areas'),
+      PopUpModel(icon: HugeIcons.strokeRoundedWallet01, title: 'Price'),
+      PopUpModel(
+          icon: HugeIcons.strokeRoundedShoppingBasket01,
+          title: 'Infrastructure'),
+      PopUpModel(icon: Icons.layers, title: 'Without any Layer'),
     ];
 
     return Material(
@@ -146,26 +153,28 @@ class _BottomOptionWidgetsSectionState extends State<BottomOptionWidgetsSection>
         padding: const EdgeInsets.all(16),
         width: 180,
         child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          mainAxisSize: MainAxisSize.min,
-          children: btnList.asMap().entries.map((e) => PopupOption(
-            icon: e.value.icon,
-            text: e.value.title,
-            onTap: (){
-              onSelected(e.key);
-            },
-            color: selectedItem==e.key ? AppPalette.primary : null,
-          )).toList()
-
-        ),
+            crossAxisAlignment: CrossAxisAlignment.start,
+            mainAxisSize: MainAxisSize.min,
+            children: btnList
+                .asMap()
+                .entries
+                .map((e) => PopupOption(
+                      icon: e.value.icon,
+                      text: e.value.title,
+                      onTap: () {
+                        onSelected(e.key);
+                      },
+                      color: selectedItem == e.key ? AppPalette.primary : null,
+                    ))
+                .toList()),
       ),
     );
   }
 }
 
 class PopUpModel {
-   final IconData icon;
-   final String title;
+  final IconData icon;
+  final String title;
 
   PopUpModel({required this.icon, required this.title});
 }

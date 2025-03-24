@@ -5,23 +5,23 @@ import 'package:moniepoint_test/core/animations/fade_animation.dart';
 import 'package:moniepoint_test/core/animations/scale_transition.dart';
 
 class RandomPositionedContainers extends StatelessWidget {
-  final int itemCount = 10; // Number of containers
+  final int itemCount = 10;
   final double containerSize = 50.0;
   final AnimationController controller;
   final Interval containerInterval;
   final Interval childInterval;
 
-  const RandomPositionedContainers({super.key, required this.controller, required this.childInterval, required this.containerInterval}); // Size of each container
+  const RandomPositionedContainers(
+      {super.key,
+      required this.controller,
+      required this.childInterval,
+      required this.containerInterval});
 
   @override
   Widget build(BuildContext context) {
-    // Get the size of the screen
     final screenSize = MediaQuery.of(context).size;
-
-    // Create a list of random positions for the containers
     final random = Random();
     final List<Widget> positionedContainers = List.generate(itemCount, (index) {
-      // Generate random x and y coordinates within the screen bounds
       final x = random.nextDouble() * (screenSize.width - containerSize);
       final y = random.nextDouble() * (screenSize.height - containerSize);
 
@@ -35,13 +35,21 @@ class RandomPositionedContainers extends StatelessWidget {
             width: containerSize,
             height: containerSize,
             decoration: const BoxDecoration(
-              borderRadius: BorderRadius.only(topRight: Radius.circular(16), topLeft: Radius.circular(16), bottomRight: Radius.circular(16)),
+              borderRadius: BorderRadius.only(
+                  topRight: Radius.circular(16),
+                  topLeft: Radius.circular(16),
+                  bottomRight: Radius.circular(16)),
               color: AppPalette.primary,
             ),
             child: FadeAnimation(
                 controller: controller,
                 interval: childInterval,
-                child: const Center(child: Icon(Icons.holiday_village, color: AppPalette.pureWhite, size: 20,))),
+                child: const Center(
+                    child: Icon(
+                  Icons.holiday_village,
+                  color: AppPalette.pureWhite,
+                  size: 20,
+                ))),
           ),
         ),
       );
@@ -52,7 +60,9 @@ class RandomPositionedContainers extends StatelessWidget {
       body: SafeArea(
         bottom: false,
         child: Padding(
-          padding: const EdgeInsets.only(top: 30, ),
+          padding: const EdgeInsets.only(
+            top: 30,
+          ),
           child: Stack(
             children: positionedContainers,
           ),

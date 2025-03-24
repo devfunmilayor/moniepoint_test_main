@@ -1,6 +1,5 @@
 import 'package:flutter/material.dart';
 
-
 class PopupOption extends StatelessWidget {
   final IconData icon;
   final String text;
@@ -23,11 +22,11 @@ class PopupOption extends StatelessWidget {
         padding: const EdgeInsets.symmetric(vertical: 8.0),
         child: Row(
           children: [
-            Icon(icon, color: color),
+            Icon(icon, color: color, size: 15),
             const SizedBox(width: 8),
             Text(
               text,
-              style: TextStyle(color: color, fontSize: 16),
+              style: TextStyle(color: color, fontSize: 14),
             ),
           ],
         ),
